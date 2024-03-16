@@ -1,7 +1,7 @@
 import React from "react";
-import ExpenseData from "../../ExpenseData";
 
-export default function ExpenseTable() {
+export default function ExpenseTable({ expense }) {
+  let totalAmount = 0;
   return (
     <table className="expense-table">
       <thead>
@@ -43,18 +43,25 @@ export default function ExpenseTable() {
         </tr>
       </thead>
       <tbody>
-        {ExpenseData.map(({id, title, category, amount}) => (
-          <tr key={id}>
-            <td>{title}</td>
-            <td>{category}</td>
-            <td>₹{amount}</td>
-          </tr>
-        ))}
+        {expense.map(({ id, title, category, amount }) => {
+          totalAmount += +amount;
+          return (
+            <tr key={id}>
+              <td>{title}</td>
+              <td>{category}</td>
+              <td>₹{amount}</td>
+            </tr>
+          );
+        })}
         <tr>
-            <td><b>Total</b></td>
-            <td></td>
-            <td><b>₹{8000}</b></td>
-          </tr>
+          <td>
+            <b>Total</b>
+          </td>
+          <td></td>
+          <td>
+            <b>₹{totalAmount}</b>
+          </td>
+        </tr>
       </tbody>
     </table>
   );
