@@ -5,13 +5,13 @@ import { useState } from "react";
 import ExpenseData from '../ExpenseData'
 
 function App() {
-  const [expense, setExpense] = useState(ExpenseData)
+  const [expenseData, setExpenseData] = useState(ExpenseData)
   return (
     <main>
       <h1>Track Your Expense</h1>
       <div className="expense-tracker">
-        <ExpenseForm setExpense = {setExpense}/>
-        <ExpenseTable expense = {expense}/>
+        <ExpenseForm setExpenseData = {setExpenseData}/>
+        <ExpenseTable expenseData = {expenseData}/>
         <div className="context-menu">
           <div>Edit</div>
           <div>Delete</div>
