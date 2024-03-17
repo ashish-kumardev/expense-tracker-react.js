@@ -1,20 +1,6 @@
 import React, { useEffect, useState } from "react";
 
 export default function ExpenseForm({ setExpenseData }) {
-  // function handleSubmit(e) {
-  //   e.preventDefault();
-  //   const formData = new FormData(e.target);
-  //   const data = {}
-  //   for (const [key, value] of formData.entries()) {
-  //     data[key] = value
-  //   }
-
-  //   setExpenseData(prev => [...prev, {
-  //     ...data,
-  //     id : crypto.randomUUID()
-  //   }])
-  // }
-
   const [expense, setExpense] = useState({
     title: "",
     category: "",
@@ -32,6 +18,14 @@ export default function ExpenseForm({ setExpenseData }) {
     ]);
   }
 
+  function handleFormInput(e) {
+    const { name, value } = e.target;
+    setExpense((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  }
+
   return (
     <form className="expense-form" onSubmit={handleSubmit}>
       <div className="input-container">
@@ -39,12 +33,7 @@ export default function ExpenseForm({ setExpenseData }) {
         <input
           id="title"
           name="title"
-          onChange={(e) =>
-            setExpense((prev) => ({
-              ...prev,
-              title: e.target.value,
-            }))
-          }
+          onChange={handleFormInput}
           value={expense.title}
         />
       </div>
@@ -54,12 +43,7 @@ export default function ExpenseForm({ setExpenseData }) {
           id="category"
           name="category"
           value={expense.category}
-          onChange={(e) =>
-            setExpense((prev) => ({
-              ...prev,
-              category: e.target.value,
-            }))
-          }
+          onChange={handleFormInput}
         >
           <option hidden>Select Category</option>
           <option value="Grocery">Grocery</option>
@@ -75,12 +59,7 @@ export default function ExpenseForm({ setExpenseData }) {
           id="amount"
           name="amount"
           value={expense.amount}
-          onChange={(e) =>
-            setExpense((prev) => ({
-              ...prev,
-              amount: e.target.value,
-            }))
-          }
+          onChange={handleFormInput}
         />
       </div>
       <button className="add-btn">Add</button>
