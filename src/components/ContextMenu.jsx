@@ -4,13 +4,22 @@ export default function ContextMenu({
   contextMenuPosition,
   setContextMenuPosition,
   rowId,
+  expenseData,
   setExpenseData,
+  setExpense,
+  setIsEdit,
+  setEditRowId,
 }) {
   return (
     <div className="context-menu" style={contextMenuPosition}>
       <div
         onClick={() => {
-          console.log("Editing....");
+          const [{ title, category, amount }] = expenseData.filter(
+            (expense) => expense.id === rowId
+          );
+          setExpense({ title, category, amount });
+          setIsEdit(true);
+          setEditRowId(rowId);
           setContextMenuPosition({});
         }}
       >

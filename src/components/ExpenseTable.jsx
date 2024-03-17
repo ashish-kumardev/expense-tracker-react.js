@@ -3,7 +3,13 @@ import Select from "./Select";
 import { useFilter } from "../hooks/useFilter";
 import ContextMenu from "./ContextMenu";
 
-export default function ExpenseTable({ expenseData, setExpenseData }) {
+export default function ExpenseTable({
+  expenseData,
+  setExpenseData,
+  setExpense,
+  setIsEdit,
+  setEditRowId
+}) {
   const [contextMenuPosition, setContextMenuPosition] = useState({});
   const [rowId, setRowId] = useState(null);
   let totalAmount = 0;
@@ -64,7 +70,7 @@ export default function ExpenseTable({ expenseData, setExpenseData }) {
                 onContextMenu={(e) => {
                   e.preventDefault();
                   setContextMenuPosition({ left: e.clientX, top: e.clientY });
-                  setRowId(id)
+                  setRowId(id);
                 }}
               >
                 <td>{title}</td>
@@ -89,7 +95,11 @@ export default function ExpenseTable({ expenseData, setExpenseData }) {
           contextMenuPosition={contextMenuPosition}
           setContextMenuPosition={setContextMenuPosition}
           rowId={rowId}
-          setExpenseData = {setExpenseData}
+          expenseData = {expenseData}
+          setExpenseData={setExpenseData}
+          setExpense={setExpense}
+          setIsEdit={setIsEdit}
+          setEditRowId={setEditRowId}
         />
       )}
     </>
