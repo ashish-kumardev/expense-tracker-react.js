@@ -7,8 +7,37 @@ export default function ExpenseForm({ setExpenseData }) {
     amount: "",
   });
 
-  function handleSubmit(e) {
+  const [error, setError] = useState({});
+
+  const handleFormInput = (e) => {
+    const { name, value } = e.target;
+    setExpense((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  const validateForm = () => {
+    const errorObj = {};
+    if (!expense.title) {
+      errorObj.title = "Title should not be empty !";
+    }
+    if (!expense.category) {
+      errorObj.category = "Please Select an Category !";
+    }
+    if (!expense.amount) {
+      errorObj.amount = "Amount should not be empty !";
+    }
+
+    setError(errorObj);
+    return errorObj;
+  };
+
+  const handleSubmit = (e) => {
     e.preventDefault();
+    const obj = validateForm();
+    console.log(obj);
+    if (Object.values(obj).length) return;
     setExpenseData((prev) => [
       ...prev,
       {
@@ -16,15 +45,12 @@ export default function ExpenseForm({ setExpenseData }) {
         id: crypto.randomUUID(),
       },
     ]);
-  }
-
-  function handleFormInput(e) {
-    const { name, value } = e.target;
-    setExpense((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  }
+    setExpense({
+      title: "",
+      category: "",
+      amount: "",
+    });
+  };
 
   return (
     <form className="expense-form" onSubmit={handleSubmit}>
@@ -36,6 +62,7 @@ export default function ExpenseForm({ setExpenseData }) {
           onChange={handleFormInput}
           value={expense.title}
         />
+        <p className="error">{error.title}</p>
       </div>
       <div className="input-container">
         <label htmlFor="category">Category</label>
@@ -52,6 +79,7 @@ export default function ExpenseForm({ setExpenseData }) {
           <option value="Education">Education</option>
           <option value="Medicine">Medicine</option>
         </select>
+        <p className="error">{error.category}</p>
       </div>
       <div className="input-container">
         <label htmlFor="amount">Amount</label>
@@ -61,6 +89,7 @@ export default function ExpenseForm({ setExpenseData }) {
           value={expense.amount}
           onChange={handleFormInput}
         />
+        <p className="error">{error.amount}</p>
       </div>
       <button className="add-btn">Add</button>
     </form>

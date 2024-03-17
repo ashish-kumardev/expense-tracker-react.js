@@ -16,6 +16,8 @@ main {
 
 .expense-tracker {
   display: flex;
+  justify-content: center;
+  align-items: flex-start;
   gap: 32px;
 }
 
@@ -74,7 +76,8 @@ main {
 .input-container {
   display: flex;
   flex-direction: column;
-  margin-bottom: 12px;
+  margin-bottom: 18px;
+  position: relative;
 }
 
 .input-container label {
@@ -117,6 +120,14 @@ main {
 #category {
   height: 28px;
   font-family: inherit;
+}
+
+.error{
+  color: red;
+  margin: 0;
+  font-size: 12px;
+  position: absolute;
+  top: 100%;
 }
 
 @media (max-width: 900px) {
