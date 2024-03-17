@@ -4,7 +4,7 @@ import { useFilter } from "../hooks/useFilter";
 
 export default function ExpenseTable({ expenseData }) {
   let totalAmount = 0;
-  const [filteredList, setQuery] = useFilter(expenseData, 'title');
+  const [filteredList, setQuery] = useFilter(expenseData, 'category');
   return (
     <table className="expense-table">
       <thead>
@@ -17,7 +17,7 @@ export default function ExpenseTable({ expenseData }) {
               optionList={[
                 "Grocery",
                 "Clothes",
-                "Bill",
+                "Bills",
                 "Education",
                 "Medicine",
               ]}
