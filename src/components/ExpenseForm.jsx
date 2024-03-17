@@ -11,6 +11,35 @@ export default function ExpenseForm({ setExpenseData }) {
 
   const [error, setError] = useState({});
 
+  const validationConfig = {
+    title: [
+      {
+        required: true,
+        message: "Title should not be empty!",
+      },
+      {
+        minLength: 3,
+        message: "Title should not be less than 3!",
+      },
+    ],
+    category: [
+      {
+        required: true,
+        message: "Please Select an Category!",
+      },
+    ],
+    amount: [
+      {
+        required: true,
+        message: "Amount should not be empty!",
+      },
+      {
+        onlyNumber: true,
+        message: "Amount should be an number!",
+      },
+    ],
+  };
+
   const handleFormInput = (e) => {
     const { name, value } = e.target;
     setExpense((prev) => ({
@@ -19,17 +48,26 @@ export default function ExpenseForm({ setExpenseData }) {
     }));
   };
 
-  const validateForm = () => {
+  const validateForm = (formData) => {
     const errorObj = {};
-    if (!expense.title) {
-      errorObj.title = "Title should not be empty !";
-    }
-    if (!expense.category) {
-      errorObj.category = "Please Select an Category !";
-    }
-    if (!expense.amount) {
-      errorObj.amount = "Amount should not be empty !";
-    }
+    Object.entries(formData).forEach(([key, value]) => {
+      validationConfig[key].some((rule) => {
+        if (rule.required && !value) {
+          errorObj[key] = rule.message;
+          return true;
+        }
+
+        if (value.length < rule.minLength) {
+          errorObj[key] = rule.message;
+          return true;
+        }
+
+        if (rule.onlyNumber && !/^[0-9]+$/.test(value)) {
+          errorObj[key] = rule.message;
+          return true;
+        }
+      });
+    });
 
     setError(errorObj);
     return errorObj;
@@ -37,9 +75,8 @@ export default function ExpenseForm({ setExpenseData }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const obj = validateForm();
-    console.log(obj);
-    if (Object.values(obj).length) return;
+    const validationResult = validateForm(expense);
+    if (Object.values(validationResult).length) return;
     setExpenseData((prev) => [
       ...prev,
       {
