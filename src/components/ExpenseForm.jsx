@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import Input from "./Input";
+import Select from "./Select";
 
 export default function ExpenseForm({ setExpenseData }) {
   const [expense, setExpense] = useState({
@@ -54,43 +56,36 @@ export default function ExpenseForm({ setExpenseData }) {
 
   return (
     <form className="expense-form" onSubmit={handleSubmit}>
+      <Input
+        label="Title"
+        type="text"
+        id="title"
+        name="title"
+        onChange={handleFormInput}
+        value={expense.title}
+        error={error.title}
+      />
       <div className="input-container">
-        <label htmlFor="title">Title</label>
-        <input
-          id="title"
-          name="title"
-          onChange={handleFormInput}
-          value={expense.title}
-        />
-        <p className="error">{error.title}</p>
-      </div>
-      <div className="input-container">
-        <label htmlFor="category">Category</label>
-        <select
+        <Select
+          label="Category"
           id="category"
+          optionList={["Grocery", "Clothes", "Bills", "Education", "Medicine"]}
+          defaultValue="Select Category"
+          hidden={true}
           name="category"
           value={expense.category}
           onChange={handleFormInput}
-        >
-          <option hidden>Select Category</option>
-          <option value="Grocery">Grocery</option>
-          <option value="Clothes">Clothes</option>
-          <option value="Bills">Bills</option>
-          <option value="Education">Education</option>
-          <option value="Medicine">Medicine</option>
-        </select>
-        <p className="error">{error.category}</p>
-      </div>
-      <div className="input-container">
-        <label htmlFor="amount">Amount</label>
-        <input
-          id="amount"
-          name="amount"
-          value={expense.amount}
-          onChange={handleFormInput}
+          error={error.category}
         />
-        <p className="error">{error.amount}</p>
       </div>
+      <Input
+        label="Amount"
+        id="amount"
+        name="amount"
+        onChange={handleFormInput}
+        value={expense.amount}
+        error={error.amount}
+      />
       <button className="add-btn">Add</button>
     </form>
   );

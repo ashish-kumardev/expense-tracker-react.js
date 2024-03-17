@@ -1,23 +1,29 @@
 import React, { useState } from "react";
+import Select from "./Select";
 
 export default function ExpenseTable({ expenseData }) {
   let totalAmount = 0;
-  const [filterValue, setFilterValue] = useState('')
-  const filteredList = expenseData.filter(({category}) => category.toLowerCase().includes(filterValue))
+  const [filterValue, setFilterValue] = useState("");
+  const filteredList = expenseData.filter(({ category }) =>
+    category.toLowerCase().includes(filterValue)
+  );
   return (
     <table className="expense-table">
       <thead>
         <tr>
           <th>Title</th>
           <th>
-            <select onChange={(e) => setFilterValue(e.target.value.toLowerCase())}>
-              <option value="">All</option>
-              <option value="Grocery">Grocery</option>
-              <option value="Clothes">Clothes</option>
-              <option value="Bills">Bills</option>
-              <option value="Education">Education</option>
-              <option value="Medicine">Medicine</option>
-            </select>
+            <Select
+              onChange={(e) => setFilterValue(e.target.value.toLowerCase())}
+              defaultValue="All"
+              optionList={[
+                "Grocery",
+                "Clothes",
+                "Bills",
+                "Education",
+                "Medicine",
+              ]}
+            />
           </th>
           <th className="amount-column">
             <div>
