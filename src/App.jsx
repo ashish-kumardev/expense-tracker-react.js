@@ -3,16 +3,16 @@ import ExpenseTable from "./components/ExpenseTable";
 import "./App.css";
 import { useState } from "react";
 import ExpenseData from "../ExpenseData";
+import { useLocalStorage } from "./hooks/useLocalStorage";
 
 function App() {
-  const [expenseData, setExpenseData] = useState(ExpenseData);
-  const [expense, setExpense] = useState({
+  const [expenseData, setExpenseData] = useLocalStorage('expenseData', ExpenseData);
+  const [expense, setExpense] = useLocalStorage('expense',{
     title: "",
     category: "",
     amount: "",
   });
-  const [isEdit, setIsEdit] = useState(false);
-  const [editRowId, setEditRowId] = useState(null);
+  const [editRowId, setEditRowId] = useLocalStorage('editRowId', null);
   return (
     <main>
       <h1>Track Your Expense</h1>
@@ -21,15 +21,13 @@ function App() {
           setExpenseData={setExpenseData}
           expense={expense}
           setExpense={setExpense}
-          isEdit={isEdit}
-          setIsEdit={setIsEdit}
           editRowId={editRowId}
+          setEditRowId= {setEditRowId}
         />
         <ExpenseTable
           expenseData={expenseData}
           setExpenseData={setExpenseData}
           setExpense={setExpense}
-          setIsEdit={setIsEdit}
           setEditRowId={setEditRowId}
         />
       </div>

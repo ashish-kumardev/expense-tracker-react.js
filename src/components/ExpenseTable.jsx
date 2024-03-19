@@ -7,7 +7,6 @@ export default function ExpenseTable({
   expenseData,
   setExpenseData,
   setExpense,
-  setIsEdit,
   setEditRowId,
 }) {
   const [contextMenuPosition, setContextMenuPosition] = useState({});
@@ -35,10 +34,10 @@ export default function ExpenseTable({
 
                 <svg
                   onClick={() => {
-                    if (sortStatus === "ascending") {
+                    if (sortStatus === "ascendingTitle") {
                       return;
                     }
-                    setSortStatus("ascending");
+                    setSortStatus("ascendingTitle");
                     return setSortCallback(
                       () => (a, b) => a.title.localeCompare(b.title)
                     );
@@ -54,10 +53,10 @@ export default function ExpenseTable({
 
                 <svg
                   onClick={() => {
-                    if (sortStatus === "descending") {
+                    if (sortStatus === "descendingTitle") {
                       return;
                     }
-                    setSortStatus("descending");
+                    setSortStatus("descendingTitle");
                     return setSortCallback(
                       () => (a, b) => b.title.localeCompare(a.title)
                     );
@@ -91,10 +90,10 @@ export default function ExpenseTable({
 
                 <svg
                   onClick={() => {
-                    if (sortStatus === "ascending") {
+                    if (sortStatus === "ascendingAmount") {
                       return;
                     }
-                    setSortStatus("ascending");
+                    setSortStatus("ascendingAmount");
                     return setSortCallback(() => (a, b) => a.amount - b.amount);
                   }}
                   xmlns="http://www.w3.org/2000/svg"
@@ -108,10 +107,10 @@ export default function ExpenseTable({
 
                 <svg
                   onClick={() => {
-                    if (sortStatus === "descending") {
+                    if (sortStatus === "descendingAmount") {
                       return;
                     }
-                    setSortStatus("descending");
+                    setSortStatus("descendingAmount");
                     return setSortCallback(() => (a, b) => b.amount - a.amount);
                   }}
                   xmlns="http://www.w3.org/2000/svg"
@@ -150,17 +149,7 @@ export default function ExpenseTable({
             <td>
               <b>Total</b>
             </td>
-            <td
-              onClick={() => {
-                if (sortStatus === "clear") {
-                  return;
-                }
-                setSortStatus("clear");
-                return setSortCallback(() => () => {});
-              }}
-            >
-              <b className="clear-sorting">Clear Sort</b>
-            </td>
+            <td></td>
             <td>
               <b>₹{totalAmount}</b>
             </td>
@@ -175,10 +164,22 @@ export default function ExpenseTable({
           expenseData={expenseData}
           setExpenseData={setExpenseData}
           setExpense={setExpense}
-          setIsEdit={setIsEdit}
           setEditRowId={setEditRowId}
         />
       )}
+
+      <button
+        className="clear-sort"
+        onClick={() => {
+          if (sortStatus === "clear") {
+            return;
+          }
+          setSortStatus("clear");
+          return setSortCallback(() => () => {});
+        }}
+      >
+        Clear Sort by
+      </button>
     </>
   );
 }

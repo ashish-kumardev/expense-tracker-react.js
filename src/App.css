@@ -8,6 +8,7 @@ body {
 main {
   max-width: 900px;
   margin-inline: auto;
+  position: relative;
 }
 
 * {
@@ -19,6 +20,7 @@ main {
   justify-content: center;
   align-items: flex-start;
   gap: 32px;
+  position: unset;
 }
 
 .expense-form {
@@ -129,8 +131,20 @@ main {
   top: 100%;
 }
 
-.clear-sorting{
+.clear-sort{
   cursor: pointer;
+  position: absolute;
+  width: 120px;
+  padding: .8rem 0;
+  border: none;
+  outline: none;
+  border-radius: 8px;
+  top: 0;
+  right: 0;
+  background-color: red;
+  color: #fff;
+  font-weight: 600;
+  font-size: 1rem;
 }
 
 @media (max-width: 900px) {
@@ -140,5 +154,26 @@ main {
 
   .expense-tracker {
     flex-direction: column;
+  }
+}
+
+@media (max-width : 468px){
+  .clear-sort{
+    bottom: -12%;
+    top: initial;
+    font-size: .85rem;
+    padding: 10px 0;
+    width: 100px;
+    border-radius: 4px;
+  }
+}
+
+
+@media (max-width : 300px){
+  body{
+    margin: 0 8px;
+  }
+  .expense-table{
+    font-size: 12px;
   }
 }

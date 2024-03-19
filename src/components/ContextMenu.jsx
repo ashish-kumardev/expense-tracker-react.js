@@ -7,7 +7,6 @@ export default function ContextMenu({
   expenseData,
   setExpenseData,
   setExpense,
-  setIsEdit,
   setEditRowId,
 }) {
   return (
@@ -18,7 +17,6 @@ export default function ContextMenu({
             (expense) => expense.id === rowId
           );
           setExpense({ title, category, amount });
-          setIsEdit(true);
           setEditRowId(rowId);
           setContextMenuPosition({});
         }}

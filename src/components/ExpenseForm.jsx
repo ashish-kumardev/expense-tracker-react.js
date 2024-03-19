@@ -6,9 +6,8 @@ export default function ExpenseForm({
   setExpenseData,
   expense,
   setExpense,
-  isEdit,
-  setIsEdit,
   editRowId,
+  setEditRowId
 }) {
   const [error, setError] = useState({});
 
@@ -78,7 +77,7 @@ export default function ExpenseForm({
     e.preventDefault();
     const validationResult = validateForm(expense);
     if (Object.values(validationResult).length) return;
-    if (isEdit) {
+    if (editRowId) {
       setExpenseData((prev) => {
         const updatedExpenses = prev.map((exp) => {
           if (exp.id === editRowId) {
@@ -99,13 +98,15 @@ export default function ExpenseForm({
         category: "",
         amount: "",
       });
+
+      setEditRowId('')
       return;
     }
     setExpenseData((prev) => [
       ...prev,
       {
-        ...expense,
         id: crypto.randomUUID(),
+        ...expense,
       },
     ]);
     setExpense({
@@ -147,7 +148,7 @@ export default function ExpenseForm({
         value={expense.amount}
         error={error.amount}
       />
-      <button className="add-btn">{isEdit ? "Save" : "Add"}</button>
+      <button className="add-btn">{editRowId ? "Save" : "Add"}</button>
     </form>
   );
 }
