@@ -129,6 +129,10 @@ main {
   top: 100%;
 }
 
+.clear-sorting{
+  cursor: pointer;
+}
+
 @media (max-width: 900px) {
   body {
     margin-inline: 16px;
