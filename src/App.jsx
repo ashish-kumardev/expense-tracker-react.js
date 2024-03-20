@@ -30,6 +30,7 @@ function App() {
         />
       </div>
 
+    <footer>Made with 💖 by Ashish Kumar</footer>
     </main>
   );
 }

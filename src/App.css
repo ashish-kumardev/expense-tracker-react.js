@@ -146,6 +146,14 @@ main {
   font-size: 1rem;
 }
 
+footer{
+  position: absolute;
+  bottom: 1rem;
+  left: 0;
+  width: 100%;
+  text-align: center;
+}
+
 @media (max-width: 900px) {
   body {
     margin-inline: 16px;
