@@ -7,7 +7,7 @@ export default function ExpenseForm({
   expense,
   setExpense,
   editRowId,
-  setEditRowId
+  setEditRowId,
 }) {
   const [error, setError] = useState({});
 
@@ -99,7 +99,7 @@ export default function ExpenseForm({
         amount: "",
       });
 
-      setEditRowId('')
+      setEditRowId("");
       return;
     }
     setExpenseData((prev) => [

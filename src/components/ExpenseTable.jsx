@@ -168,7 +168,7 @@ export default function ExpenseTable({
         />
       )}
 
-      <button
+      {/* <button
         className="clear-sort"
         onClick={() => {
           if (sortStatus === "clear") {
@@ -179,7 +179,7 @@ export default function ExpenseTable({
         }}
       >
         Clear Sort by
-      </button>
+      </button> */}
     </>
   );
 }

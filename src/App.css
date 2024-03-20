@@ -8,7 +8,7 @@ body {
 main {
   max-width: 900px;
   margin-inline: auto;
-  position: relative;
+  /* position: relative; */
 }
 
 * {
@@ -20,7 +20,6 @@ main {
   justify-content: center;
   align-items: flex-start;
   gap: 32px;
-  position: unset;
 }
 
 .expense-form {
